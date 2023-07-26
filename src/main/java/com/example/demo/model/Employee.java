@@ -1,20 +1,28 @@
 package com.example.demo.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "employee")
 public class Employee {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer employeeId;
 	private String firstName;
 	private String lastName;
 	private Integer salary;
 	
 	
-	
 	public Employee() {
 		super();
 	}
-
-	public Employee(Integer employeeId, String firstName, String lastName, Integer salary) {
+	
+	public Employee(String firstName, String lastName, Integer salary) {
 		super();
-		this.employeeId = employeeId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.salary = salary;
