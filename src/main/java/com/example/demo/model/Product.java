@@ -1,6 +1,16 @@
 package com.example.demo.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "product")
 public class Product {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer productId;
 	private String productName;
 	private Double productPrice;
@@ -15,9 +25,8 @@ public class Product {
 		super();
 	}
 
-	public Product(Integer productId, String productName, Double productPrice, Integer productAmount,String productDetail) {
+	public Product(String productName, Double productPrice, Integer productAmount,String productDetail) {
 		super();
-		this.productId = productId;
 		this.productName = productName;
 		this.productPrice = productPrice;
 		this.productAmount = productAmount;
