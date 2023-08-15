@@ -20,7 +20,9 @@ public class Skill {
 	@ManyToOne
               @JoinColumn(name = "employee_id")
 	private Employee employee;
-
+	public Integer getId(Integer id) {
+		 return id;
+	}
 	public void setId(Integer id) {
 		this.id = id;
 	}
