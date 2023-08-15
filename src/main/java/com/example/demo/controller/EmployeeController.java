@@ -15,12 +15,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Employee;
+import com.example.demo.model.Role;
 import com.example.demo.repository.EmployeeRepository;
+import com.example.demo.repository.RoleRepository;
 
 @RestController
 public class EmployeeController {
 	@Autowired
 	EmployeeRepository employeeRepository;
+	@Autowired
+	RoleRepository roleRepository;
 	@GetMapping("/employee")
 	public ResponseEntity<Object> getEmployee() {
 		List<Employee> employees = employeeRepository.findAll();
@@ -48,6 +52,8 @@ public class EmployeeController {
 	@PostMapping("/employee")
 	public ResponseEntity<Object> addEmployee(@RequestBody Employee body) {
 		try {
+			Optional<Role> role = roleRepository.findById(4);
+			body.setRole(role.get());
 			Employee employee = employeeRepository.save(body);
 			return new ResponseEntity<>(employee,HttpStatus.CREATED);
 		} catch (Exception e) {
@@ -65,10 +71,10 @@ public class EmployeeController {
 				employee.get().setLastName(body.getLastName());
 				employee.get().setSalary(body.getSalary());
 				employeeRepository.save(employee.get());
+				return new ResponseEntity<>(employee.get(),HttpStatus.OK);
 			}else {
 				return new ResponseEntity<>("Client Error",HttpStatus.NOT_FOUND);
 			}
-			return new ResponseEntity<>(employee.get(),HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>("Internal Sever Error",HttpStatus.INTERNAL_SERVER_ERROR);
 		}

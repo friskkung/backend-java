@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,6 +17,9 @@ public class Employee {
 	private String firstName;
 	private String lastName;
 	private Integer salary;
+	@ManyToOne
+	@JoinColumn(name = "role_id")
+		private Role role;
 	
 	
 	public Employee() {
@@ -58,6 +63,13 @@ public class Employee {
 
 	public void setSalary(Integer salary) {
 		this.salary = salary;
+	}
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 }

@@ -55,7 +55,7 @@ public class ProductController {
 		products.add((Product) productRepository.findByProductDetailContaining(text));
 		try {
 			if (!(products.isEmpty())) {
-				return new ResponseEntity<>(products,HttpStatus.OK);
+				return new ResponseEntity<>(products.toArray(),HttpStatus.OK);
 			} else {
 				return new ResponseEntity<>("Product not found",HttpStatus.BAD_REQUEST);
 			}
